@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 public class MovieTheater {
 	int rows = 10;
 	int columns = 20;
-	int numberOfSeats = 200;
+	int numberOfSeats = rows*columns;
 	LinkedHashMap<String, ArrayList<String>> hm = new LinkedHashMap<>();
 	String[][] seats = new String[10][20];
 	int remainingSeats[] = { 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
@@ -24,16 +24,16 @@ public class MovieTheater {
 		String[] input = reservation.split(" ");
 		String rno = input[0];
 		int count = Integer.parseInt(input[1]);
-		int n = count;
+		int group = count;
 		if (numberOfSeats >= count) {
-			if (n > 20) {
-				while (n > 20) {
+			if (group > 20) {
+				while (group > 20) {
 					allocate(rno, 20);
-					n -= 20;
+					group -= 20;
 				}
-				allocate(rno, n);
+				allocate(rno, group);
 			} else {
-				allocate(rno, n);
+				allocate(rno, group);
 			}
 
 		} else {
