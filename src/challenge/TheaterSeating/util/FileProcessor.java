@@ -1,11 +1,16 @@
 package challenge.TheaterSeating.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 
 public class FileProcessor {
@@ -47,29 +52,23 @@ public class FileProcessor {
 		return content;
 	}
 	
-	public void writeFile(String out) throws Exception {
-		FileWriter writer = null;
-		try {
-			File file = new File(filename);
-			file.createNewFile();
-			writer = new FileWriter(file.getAbsoluteFile(), true);
-			writer.write("\n");
-			writer.write(out);
-			writer.close();
-
-		} catch (IOException io) {
-			io.printStackTrace();
-			System.err.println("I/O Exception: " + io);
-			System.exit(1);
-		} catch (NullPointerException nullpointerException) {
-			System.err.println("Input file may be empty: "
-					+ nullpointerException);
-			System.exit(1);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Index Out of bound \n");
-			e.printStackTrace();
-		} finally {
-			writer.close();
-		}
-	}
+	
+		public void writeToFile(LinkedHashMap<String, ArrayList<String>> hm){
+	    	BufferedWriter wr = null;
+			try {
+				wr = new BufferedWriter(new FileWriter("output.txt"));
+				Iterator<Entry<String, ArrayList<String>>> itr = hm.entrySet().iterator();
+				while(itr.hasNext()) {
+					Entry<String, ArrayList<String>> pairs = itr.next();
+					String str = pairs.getKey()+ " "+pairs.getValue();
+					System.out.print(str+"\n");
+					wr.write(str+"\n");
+				}
+				wr.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	System.out.println(hm);
+	    }
 }

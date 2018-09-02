@@ -13,10 +13,10 @@ public class Driver {
 	public static void main(String[] args){
 		if(args.length >0){
 			System.out.println("Input arguments: "+args[0]);
-			//FileProcessor fileProcessor = new FileProcessor(args[0]);
+			FileProcessor fileProcessor = new FileProcessor(args[0]);
 			//String fileContent = fileProcessor.readFile(args[0]);
 			MovieTheater bookings = new MovieTheater(); 
-			String outputString = null;
+			
 			try{
 			File file = new File(args[0]);
 			
@@ -30,7 +30,7 @@ public class Driver {
 				//System.out.println(newEntry);
 				
 			}
-			bookings.writeToFile();
+			fileProcessor.writeToFile(bookings.getResults());
 			bookings.printMap();
 			} catch (FileNotFoundException ex) {
 				System.err.println("Input file not Found.");
