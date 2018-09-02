@@ -1,12 +1,21 @@
 package challenge.TheaterSeating.service;
 
-import challenge.TheaterSeating.util.FileProcessor;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+
 
 public class MovieTheater {
     int rows = 10;
     int columns = 20;
     int numberOfSeats = 200;
-    
+    Map<String, ArrayList<String>> hm = new LinkedHashMap<>();    
     String[][] seats = new String[10][20];
     int remainingSeats[]= {20, 20, 20, 20, 20, 20, 20, 20, 20, 20};
     public MovieTheater(){
@@ -41,6 +50,13 @@ public class MovieTheater {
     			for(int c=0; c<20 && n>0; c++){
     				if(seats[r][c] == null){
     					seats[r][c] = rno;
+    					if(hm.containsKey(rno)){
+    						hm.get(rno).add((char)(r+65)+Integer.toString(c+1));
+    					}else{
+    						ArrayList<String> list = new ArrayList<>();
+    						list.add((char)(r+65)+Integer.toString(c+1));
+    						hm.put(rno, list);
+    					}
     					remainingSeats[r]--;
     					numberOfSeats--;
     					n--;
@@ -56,6 +72,13 @@ public class MovieTheater {
 				if(remainingSeats[i]>0){
 					for(int j=19; seats[i][j]==null; j--){
 						seats[i][j]= rno;
+						if(hm.containsKey(rno)){
+    						hm.get(rno).add((char)(i+65)+Integer.toString(j+1));
+    					}else{
+    						ArrayList<String> list = new ArrayList<>();
+    						list.add((char)(i+65)+Integer.toString(j+1));
+    						hm.put(rno, list);
+    					}
 						n--;
 						numberOfSeats--;
 						remainingSeats[i]--;
@@ -64,6 +87,26 @@ public class MovieTheater {
 			}
 		}
     }
+    
+    public void writeToFile(){
+    	BufferedWriter wr = null;
+		try {
+			wr = new BufferedWriter(new FileWriter("output.txt"));
+			Iterator<Entry<String, ArrayList<String>>> itr = hm.entrySet().iterator();
+			while(itr.hasNext()) {
+				Entry<String, ArrayList<String>> pairs = itr.next();
+				String str = pairs.getKey()+ " "+pairs.getValue();
+				System.out.print(str+"\n");
+				wr.write(str+"\n");
+			}
+			wr.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	System.out.println(hm);
+    }
+    
     public void printMap(){
     	System.out.println("               ********************* RESERVATIONS **********************");
     	for(int r=0; r<10; r++){
