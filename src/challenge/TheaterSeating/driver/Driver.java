@@ -26,19 +26,30 @@ public class Driver {
 			String newEntry = bufferedReader.readLine();
 			
 			while(newEntry != null){
-				String output = movieTheater.bookSeat(newEntry);
-				System.out.println(output);
+				int output = movieTheater.bookSeat(newEntry);
+				if(output == -1){
+					System.out.println("Sorry, cannot process request due to Insufficient seats");
+				}else if(output == 0){
+					System.out.println("Seats booked for the reservation.");
+				}else{
+					
+				}
+				
 				newEntry = bufferedReader.readLine();
 				//System.out.println(newEntry);
 				
 			}
+			/* Writing to File */
 			fileProcessor.writeToFile(movieTheater.getResults());
+			
+			/* Print Layout of the theater */
 			movieTheater.printLayout();
 			
 			/* Calling the Test method*/
 			TestTheaterSeating test = new TestTheaterSeating();
 			MovieTheater testObject = new MovieTheater();
 			test.testMe(testObject);
+			
 			} catch (FileNotFoundException ex) {
 				System.err.println("Input file not Found.");
 				ex.printStackTrace();

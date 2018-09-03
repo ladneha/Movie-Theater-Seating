@@ -20,12 +20,12 @@ public class MovieTheater {
 		// FileProcessor fileProcessor = new FileProcessor("output.txt");
 	}
 
-	public String bookSeat(String reservation) {
+	public int bookSeat(String reservation) {
 		String[] input = reservation.split(" ");
 		String rno = input[0];
 		int count = Integer.parseInt(input[1]);
 		int group = count;
-		String output = null;
+		int output;
 		if (numberOfSeats >= count) {
 			if (group > 20) {
 				while (group > 20) {
@@ -39,19 +39,18 @@ public class MovieTheater {
 			return output;
 
 		} else {
-			return new String("Insufficient number of seats available for the group of "
-							+ count);
+			return -1;
 		}
 	}
 
-	private String allocate(String rno, int n) {
-		int count = n;
+	private int allocate(String rno, int seatsToBook) {
+		//int count = seatsToBook;
 		int counter = 1;
 		boolean check = true;
 		int r = (rows / 2) - 1;
 		while (r >= 0 && r < rows) {
-			if (remainingSeats[r] >= n) {
-				for (int c = 0; c < 20 && n > 0; c++) {
+			if (remainingSeats[r] >= seatsToBook) {
+				for (int c = 0; c < 20 && seatsToBook > 0; c++) {
 					if (seats[r][c] == null) {
 						seats[r][c] = rno;
 						if (hm.containsKey(rno)) {
@@ -64,7 +63,7 @@ public class MovieTheater {
 						}
 						remainingSeats[r]--;
 						numberOfSeats--;
-						n--;
+						seatsToBook--;
 					}
 				}
 			}
@@ -78,8 +77,8 @@ public class MovieTheater {
 				check = true;
 			}
 		}
-		if (n == 0) {
-			return new String(count + " Seats reserved for " + rno);
+		if (seatsToBook == 0) {
+			return 0;
 		} else {
 			// find and allocate in the remaining seat
 			counter = 1;
@@ -97,7 +96,7 @@ public class MovieTheater {
 							list.add((char) (i + 65) + Integer.toString(j + 1));
 							hm.put(rno, list);
 						}
-						n--;
+						seatsToBook--;
 						numberOfSeats--;
 						remainingSeats[i]--;
 					}
@@ -112,7 +111,7 @@ public class MovieTheater {
 					check = true;
 				}
 			}
-			return new String(count + " Seats reserved for " + rno);
+			return 0;
 		}
 	}
     public ArrayList<String> getList(int row, int columnStart, int columnEnd){
