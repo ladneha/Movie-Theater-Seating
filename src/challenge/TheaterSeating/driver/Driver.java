@@ -36,7 +36,8 @@ public class Driver {
 			
 			/* Calling the Test method*/
 			TestTheaterSeating test = new TestTheaterSeating();
-			test.testMe(movieTheater);
+			MovieTheater testObject = new MovieTheater();
+			test.testMe(testObject);
 			} catch (FileNotFoundException ex) {
 				System.err.println("Input file not Found.");
 				ex.printStackTrace();

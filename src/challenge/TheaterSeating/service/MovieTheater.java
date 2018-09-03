@@ -113,11 +113,20 @@ public class MovieTheater {
 			}
 		}
 	}
-
+    public ArrayList<String> getList(int row, int columnStart, int columnEnd){
+    	ArrayList<String> list = new ArrayList<>();
+    	for(int c=columnStart; c<=columnEnd; c++){
+    		list.add(seats[row][c]);
+    	}
+    	return list;
+    }
 	public LinkedHashMap<String, ArrayList<String>> getResults() {
 		return hm;
 	}
 
+	public int getNumberOfSeats(){
+		return numberOfSeats;
+	}
 	public void writeToFile() {
 		BufferedWriter wr = null;
 		try {
