@@ -138,7 +138,7 @@ public class MovieTheater {
 		System.out.println(hm);
 	}
 
-	public void printMap() {
+	public void printLayout() {
 		System.out
 				.println("               ********************* RESERVATIONS **********************");
 		for (int r = 0; r < 10; r++) {

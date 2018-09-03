@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import challenge.TheaterSeating.service.MovieTheater;
+import challenge.TheaterSeating.test.TestTheaterSeating;
 import challenge.TheaterSeating.util.FileProcessor;
 
 public class Driver {
@@ -31,7 +32,11 @@ public class Driver {
 				
 			}
 			fileProcessor.writeToFile(movieTheater.getResults());
-			movieTheater.printMap();
+			movieTheater.printLayout();
+			
+			/* Calling the Test method*/
+			TestTheaterSeating test = new TestTheaterSeating();
+			test.testMe(movieTheater);
 			} catch (FileNotFoundException ex) {
 				System.err.println("Input file not Found.");
 				ex.printStackTrace();
