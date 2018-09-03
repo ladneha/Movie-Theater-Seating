@@ -20,30 +20,31 @@ public class MovieTheater {
 		// FileProcessor fileProcessor = new FileProcessor("output.txt");
 	}
 
-	public void bookSeat(String reservation) {
+	public String bookSeat(String reservation) {
 		String[] input = reservation.split(" ");
 		String rno = input[0];
 		int count = Integer.parseInt(input[1]);
 		int group = count;
+		String output = null;
 		if (numberOfSeats >= count) {
 			if (group > 20) {
 				while (group > 20) {
-					allocate(rno, 20);
+					output = allocate(rno, 20);
 					group -= 20;
 				}
-				allocate(rno, group);
+				output = allocate(rno, group);
 			} else {
-				allocate(rno, group);
+				output = allocate(rno, group);
 			}
+			return output;
 
 		} else {
-			System.out
-					.println("Insufficient number of seats available for the group of "
+			return new String("Insufficient number of seats available for the group of "
 							+ count);
 		}
 	}
 
-	private void allocate(String rno, int n) {
+	private String allocate(String rno, int n) {
 		int count = n;
 		int counter = 1;
 		boolean check = true;
@@ -78,7 +79,7 @@ public class MovieTheater {
 			}
 		}
 		if (n == 0) {
-			System.out.println(count + " Seats reserved for " + rno);
+			return new String(count + " Seats reserved for " + rno);
 		} else {
 			// find and allocate in the remaining seat
 			counter = 1;
@@ -111,6 +112,7 @@ public class MovieTheater {
 					check = true;
 				}
 			}
+			return new String(count + " Seats reserved for " + rno);
 		}
 	}
     public ArrayList<String> getList(int row, int columnStart, int columnEnd){

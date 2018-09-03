@@ -26,7 +26,8 @@ public class Driver {
 			String newEntry = bufferedReader.readLine();
 			
 			while(newEntry != null){
-				movieTheater.bookSeat(newEntry);
+				String output = movieTheater.bookSeat(newEntry);
+				System.out.println(output);
 				newEntry = bufferedReader.readLine();
 				//System.out.println(newEntry);
 				
