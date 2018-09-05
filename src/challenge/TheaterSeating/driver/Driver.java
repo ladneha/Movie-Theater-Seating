@@ -26,6 +26,10 @@ public class Driver {
 
 				while (newEntry != null) {
 					int output = movieTheater.bookSeat(newEntry);
+					if (output == 1) {
+						System.out
+								.println("Invalid number of Seats");
+					}
 					if (output == -1) {
 						System.out
 								.println("Sorry, cannot process request due to Insufficient seats");

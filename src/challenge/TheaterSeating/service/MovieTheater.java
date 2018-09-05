@@ -22,6 +22,7 @@ public class MovieTheater {
 		int count = Integer.parseInt(input[1]);
 		int group = count;
 		int output;
+		if(count > 0){
 		if (numberOfSeats >= count) {
 			totalCustomers += count;
 			if (group > 20) {
@@ -34,10 +35,15 @@ public class MovieTheater {
 				output = allocate(rno, group);
 
 			}
+		
 			return output;
 
-		} else {
+		
+		}else {
 			return -1;
+		}
+		}else{
+			return 1;
 		}
 	}
 
