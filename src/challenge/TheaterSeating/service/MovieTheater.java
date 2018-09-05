@@ -1,24 +1,19 @@
 package challenge.TheaterSeating.service;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map.Entry;
 
 public class MovieTheater {
 	int rows = 10;
 	int columns = 20;
-	int numberOfSeats = rows*columns;
+	int numberOfSeats = rows * columns;
 	LinkedHashMap<String, ArrayList<String>> hm = new LinkedHashMap<>();
 	String[][] seats = new String[10][20];
 	int remainingSeats[] = { 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
-    int satisfaction = 0;
-    int totalCustomers=0;
+	int satisfaction = 0;
+	int totalCustomers = 0;
+
 	public MovieTheater() {
-		// FileProcessor fileProcessor = new FileProcessor("output.txt");
 	}
 
 	public int bookSeat(String reservation) {
@@ -28,7 +23,7 @@ public class MovieTheater {
 		int group = count;
 		int output;
 		if (numberOfSeats >= count) {
-			totalCustomers +=count; 
+			totalCustomers += count;
 			if (group > 20) {
 				while (group > 20) {
 					output = allocate(rno, 20);
@@ -37,7 +32,7 @@ public class MovieTheater {
 				output = allocate(rno, group);
 			} else {
 				output = allocate(rno, group);
-				
+
 			}
 			return output;
 
@@ -51,7 +46,7 @@ public class MovieTheater {
 		boolean check = true;
 		int r = (rows / 2) - 1;
 		while (r >= 0 && r < rows) {
-			if (remainingSeats[r] >= seatsToBook) {                               
+			if (remainingSeats[r] >= seatsToBook) {
 				for (int c = 0; c < 20 && seatsToBook > 0; c++) {
 					if (seats[r][c] == null) {
 						seats[r][c] = rno;
@@ -66,7 +61,7 @@ public class MovieTheater {
 						remainingSeats[r]--;
 						numberOfSeats--;
 						seatsToBook--;
-						satisfaction++;   
+						satisfaction++;
 					}
 				}
 			}
@@ -79,7 +74,7 @@ public class MovieTheater {
 				counter++;
 				check = true;
 			}
-			
+
 		}
 		if (seatsToBook == 0) {
 			return 0;
@@ -118,51 +113,39 @@ public class MovieTheater {
 			return 0;
 		}
 	}
-    public ArrayList<String> getList(int row, int columnStart, int columnEnd){
-    	ArrayList<String> list = new ArrayList<>();
-    	for(int c=columnStart; c<=columnEnd; c++){
-    		list.add(seats[row][c]);
-    	}
-    	return list;
-    }
+
+	public ArrayList<String> getList(int row, int columnStart, int columnEnd) {
+		ArrayList<String> list = new ArrayList<>();
+		for (int c = columnStart; c <= columnEnd; c++) {
+			list.add(seats[row][c]);
+		}
+		return list;
+	}
+
 	public LinkedHashMap<String, ArrayList<String>> getResults() {
 		return hm;
 	}
 
-	public int getNumberOfSeats(){
+	public int getNumberOfSeats() {
 		return numberOfSeats;
 	}
-	public void writeToFile() {
-		BufferedWriter wr = null;
-		try {
-			wr = new BufferedWriter(new FileWriter("output.txt"));
-			Iterator<Entry<String, ArrayList<String>>> itr = hm.entrySet()
-					.iterator();
-			while (itr.hasNext()) {
-				Entry<String, ArrayList<String>> pairs = itr.next();
-				String str = pairs.getKey() + " " + pairs.getValue();
-				System.out.print(str + "\n");
-				wr.write(str + "\n");
-			}
-			wr.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		System.out.println(hm);
-	}
 
-	public void analysis(){
+	public void analysis() {
 		System.out.println("***** ANALYSIS *****");
-		System.out.println("Total number of groups: "+hm.size());
-		System.out.println("Total customers : "+totalCustomers);
-		System.out.println("Total number of Satisfied customers: "+satisfaction);
-		System.out.println("Percentage of Satisfied Customers :"+(satisfaction*100/totalCustomers));
-		System.out.println("Theater Utilization Percent: "+(200-numberOfSeats));
+		System.out.println("Total number of groups: " + hm.size());
+		System.out.println("Total customers : " + totalCustomers);
+		System.out.println("Total number of Satisfied customers: "
+				+ satisfaction);
+		System.out.println("Percentage of Satisfied Customers :"
+				+ (satisfaction * 100 / totalCustomers));
+		System.out.println("Theater Utilization Percent: "
+				+ (200 - numberOfSeats));
 		System.out.println();
 	}
+
 	public void printLayout() {
 		System.out
-				.println("               ********************* RESERVATIONS **********************");
+				.println("********************* RESERVATIONS **********************");
 		for (int r = 0; r < 10; r++) {
 			System.out.print((char) (r + 65) + " ");
 			for (int c = 0; c < 20; c++) {
