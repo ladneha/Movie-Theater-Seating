@@ -1,8 +1,6 @@
 **Movie Theater Seating Challenge**
-
-**Program Description:**
-
 **Language used:**  Java
+**Program Description:**
 
 This program takes an input file from command line argument, reads line by line and processes the user requests for reserving seats in the movie theater.
 
