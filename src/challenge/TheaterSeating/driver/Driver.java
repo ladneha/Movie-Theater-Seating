@@ -30,7 +30,7 @@ public class Driver {
 				if(output == -1){
 					System.out.println("Sorry, cannot process request due to Insufficient seats");
 				}else if(output == 0){
-					System.out.println("Seats booked for the reservation.");
+					//System.out.println("Seats booked for the reservation.");
 				}else{
 					
 				}
@@ -44,11 +44,12 @@ public class Driver {
 			
 			/* Print Layout of the theater */
 			movieTheater.printLayout();
-			
+			movieTheater.analysis();
 			/* Calling the Test method*/
 			TestTheaterSeating test = new TestTheaterSeating();
 			MovieTheater testObject = new MovieTheater();
 			test.testMe(testObject);
+			
 			
 			} catch (FileNotFoundException ex) {
 				System.err.println("Input file not Found.");

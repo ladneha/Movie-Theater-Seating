@@ -10,11 +10,13 @@ public class TestTheaterSeating {
 	MovieTheater testTheater;
 	
 	public void testMe(MovieTheater movieTheaterIn){
+		System.out.println("***** TESTING ******");
 		testTheater = movieTheaterIn;
 		testTheater.bookSeat("R001 5");
 		checkFirstCustomerSeat();
 		checkConsecutiveSeats();
 		checkInsufficientSeats();
+		checkGroupUnableToAccomodateInRow();
 		
 	}
 	
@@ -58,9 +60,7 @@ public class TestTheaterSeating {
 		}
 	}
 	
-	public void checkRequestOfLargeGroupSize(){
-		
-	}
+	
 	
 	public void checkGroupUnableToAccomodateInRow(){
 	    int result = testTheater.bookSeat("R003 24");	

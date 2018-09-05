@@ -15,7 +15,8 @@ public class MovieTheater {
 	LinkedHashMap<String, ArrayList<String>> hm = new LinkedHashMap<>();
 	String[][] seats = new String[10][20];
 	int remainingSeats[] = { 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
-
+    int satisfaction = 0;
+    int totalCustomers=0;
 	public MovieTheater() {
 		// FileProcessor fileProcessor = new FileProcessor("output.txt");
 	}
@@ -27,6 +28,7 @@ public class MovieTheater {
 		int group = count;
 		int output;
 		if (numberOfSeats >= count) {
+			totalCustomers +=count; 
 			if (group > 20) {
 				while (group > 20) {
 					output = allocate(rno, 20);
@@ -35,6 +37,7 @@ public class MovieTheater {
 				output = allocate(rno, group);
 			} else {
 				output = allocate(rno, group);
+				
 			}
 			return output;
 
@@ -44,12 +47,11 @@ public class MovieTheater {
 	}
 
 	private int allocate(String rno, int seatsToBook) {
-		//int count = seatsToBook;
 		int counter = 1;
 		boolean check = true;
 		int r = (rows / 2) - 1;
 		while (r >= 0 && r < rows) {
-			if (remainingSeats[r] >= seatsToBook) {
+			if (remainingSeats[r] >= seatsToBook) {                               
 				for (int c = 0; c < 20 && seatsToBook > 0; c++) {
 					if (seats[r][c] == null) {
 						seats[r][c] = rno;
@@ -64,6 +66,7 @@ public class MovieTheater {
 						remainingSeats[r]--;
 						numberOfSeats--;
 						seatsToBook--;
+						satisfaction++;   
 					}
 				}
 			}
@@ -76,6 +79,7 @@ public class MovieTheater {
 				counter++;
 				check = true;
 			}
+			
 		}
 		if (seatsToBook == 0) {
 			return 0;
@@ -142,12 +146,20 @@ public class MovieTheater {
 			}
 			wr.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		System.out.println(hm);
 	}
 
+	public void analysis(){
+		System.out.println("***** ANALYSIS *****");
+		System.out.println("Total number of groups: "+hm.size());
+		System.out.println("Total customers : "+totalCustomers);
+		System.out.println("Total number of Satisfied customers: "+satisfaction);
+		System.out.println("Percentage of Satisfied Customers :"+(satisfaction*100/totalCustomers));
+		System.out.println("Theater Utilization Percent: "+(200-numberOfSeats));
+		System.out.println();
+	}
 	public void printLayout() {
 		System.out
 				.println("               ********************* RESERVATIONS **********************");
