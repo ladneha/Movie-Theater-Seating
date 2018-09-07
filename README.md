@@ -30,3 +30,10 @@ _Maximum Theater Utilization:_
 
 1. To make sure that we are able to accommodate as many groups as possible and also keep them satisfied by allocating consecutive seats, we start allocating seats from the first column. This will allow us to allocate seats for maximum number of groups in a single row.
 2. In one or two cases if we are not able to accommodate a group in a single row, then we allocate the seats wherever there is a vacant seat in the theater.
+
+**Steps for running**
+1. Download and save the src folder in a directory.
+2. Compile all the java files driver.java, MovieTheater.java, FileProcessor.java, TestTheaterSeating.java
+3. Go to the src/challenge/TheaterSeating/Driver and run the driver.java using the command :
+   javac src/challenge/TheaterSeating/driver/Driver.java src/challenge/TheaterSeating/service/MovieTheater.java      src/challenge/TheaterSeating/util/FileProcessor.java src/challenge/TheaterSeating/test/TestTheaterSeating.java
+4. Go into the driver folder through the command prompt and run the program using java driver input.txt   
