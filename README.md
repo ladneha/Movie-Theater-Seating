@@ -34,6 +34,7 @@ _Maximum Theater Utilization:_
 **Steps for running**
 1. Download and save the src folder in a directory.
 2. Compile all the java files driver.java, MovieTheater.java, FileProcessor.java, TestTheaterSeating.java
-3. Go to the src/challenge/TheaterSeating/Driver and run the driver.java using the command :
+3. Go to the commandline inside the folder where you have stored the src folder and compile the files using the following command:
    javac src/challenge/TheaterSeating/driver/Driver.java src/challenge/TheaterSeating/service/MovieTheater.java      src/challenge/TheaterSeating/util/FileProcessor.java src/challenge/TheaterSeating/test/TestTheaterSeating.java
-4. Go into the driver folder through the command prompt and run the program using java driver input.txt   
+4. Go into the driver folder through the command prompt and run the program with the following command:
+   java driver input.txt   
